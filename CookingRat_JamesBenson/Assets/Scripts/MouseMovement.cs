@@ -51,7 +51,7 @@ public class MouseMovement : MonoBehaviour
         { 
             float deltaX = Input.GetAxis("Horizontal") * _speed;
 
-            if ((deltaX > 0 && !_facingRight) || (deltaX < 0 && _facingRight))
+            if ((deltaX < 0 && !_facingRight) || (deltaX > 0 && _facingRight))
             { 
                 Flip(); 
             }
@@ -61,7 +61,7 @@ public class MouseMovement : MonoBehaviour
            Vector3 min = _collider.bounds.min;
            Vector3 max = _collider.bounds.max;
 
-           float groundDetectionOffset = 0.2f;
+           float groundDetectionOffset = 0.1f;
            Vector2 corner1 = new(min.x, min.y - groundDetectionOffset); //Bottom left
            Vector2 corner2 = new(max.x, min.y + groundDetectionOffset); //Bottom right
            
@@ -78,7 +78,7 @@ public class MouseMovement : MonoBehaviour
            void Flip()
            {
                _facingRight = !_facingRight;
-               _spriteRenderer.flipX = !_spriteRenderer.flipX;
+               _spriteRenderer.flipX = !_spriteRenderer.flipY;
                transform.Rotate(0f, 180f, 0f);
            }
            
